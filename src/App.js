@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import BookCreate from "./components/BookCreate";
 import BookList from "./components/BookList";
 import axios from "axios";
+
 export default function App () {
     const [books, setBooks] = useState([]);
 
@@ -38,12 +39,13 @@ export default function App () {
         const response = await axios.put(`http://localhost:3001/books/${id}`,{
             title
         });
-        console.log(response);
-        books.forEach(book => {
+        const updateBooks = books.map(book => {
             if(book.id === id) {
-                book.title = response.data.title;
+                return {...book, ...response.data};
             }
+            return book;
         });
+        setBooks(updateBooks);
     };
 
     return (
