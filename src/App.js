@@ -13,7 +13,7 @@ export default function App () {
 
     useEffect(()=> {
         fetchBooks();
-    }, [])
+    }, []);
 
     const createBook = async(title) => {
         if (title===""){
